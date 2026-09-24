@@ -51,19 +51,48 @@ public class ArbolInventario {
     }
 
     public void mostrarInventario() {
-        //se subdivide el mostrar ya que se necesita reutilizar el metodo para los nodos a la izquierda y derecha de la raiz
+        // se subdivide el mostrar ya que se necesita reutilizar el metodo para los
+        // nodos a la izquierda y derecha de la raiz
         mostrarInventarioR(raiz);
     }
 
     private void mostrarInventarioR(Producto nodo) {
-        //si la raiz o nodo esta vacía no muestra nada
+        // si la raiz o nodo esta vacía no muestra nada
         if (nodo != null) {
-            //se muestran los nodos registrados a la izquierda
+            // se muestran los nodos registrados a la izquierda
             mostrarInventarioR(nodo.getIzquierdo());
-            //se muestra el nodo o raiz actual
+            // se muestra el nodo o raiz actual
             imprimir(nodo);
-            //todos los nodos registrados a la derecha
+            // todos los nodos registrados a la derecha
             mostrarInventarioR(nodo.getDerecho());
+        }
+    }
+
+    public String buscarPorID(int id) {
+        // se aplica un if corto donde si el metodo buscarR devuelve un verdadero indica
+        // que se encontro el nodo de lo contrario
+        // mostrara que el ID no existe
+        return buscarR(raiz, id) ? "ID encontrado en el sistema." : "El ID no existe.";
+    }
+
+    private boolean buscarR(Producto actual, int id) {
+        // se evalua la raiz o nodo actual, si es nulo devuelve de inmediato un false
+        if (actual == null)
+            return false;
+        // al estar rotando el valor de "actual" esta validacion nos ayuda a determinar
+        // se localiza el id y mostrar el producto
+        if (id == actual.getId()) {
+            imprimir(actual);
+            return true;
+        }
+        // con esto verifica de inmediato si hay que buscar en los nodos izquierdos o
+        // derechos, evaluado si el ID actual es menor
+        if (id < actual.getId()) {
+            // se vuelve a llamar el metodo buscarR pero cambiando el valor de "actual"
+            // para que realice nuevamente la validación en la linea 83
+            return buscarR(actual.getIzquierdo(), id);
+        } else {
+            return buscarR(actual.getDerecho(), id);
         }
     }
 

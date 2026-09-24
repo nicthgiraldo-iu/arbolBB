@@ -48,6 +48,16 @@ public class Main {
                         arbol.mostrarInventario();
                     }
                     break;
+                case 3:  //buscar producto 
+                    System.out.print("Indica el ID del producto a buscar: ");
+                    try {
+                        int buscaId = sc.nextInt();
+                        System.out.println(arbol.buscarPorID(buscaId));
+                    } catch (Exception e) {
+                        System.out.println("ID debe ser un número válido.");
+                        sc.next();
+                    }
+                    break;
                 default: // Opción no válida
                     System.out.println("Opción no válida.");
             }
