@@ -40,6 +40,14 @@ public class Main {
                         sc.next();
                     }
                     break;
+                case 2: //mostrar inventario
+                    if (arbol.estaVacio()) {
+                        System.out.println("Sus productos: (vacío, aún no se han registrado productos)");
+                        return;
+                    }else{
+                        arbol.mostrarInventario();
+                    }
+                    break;
                 default: // Opción no válida
                     System.out.println("Opción no válida.");
             }
